@@ -1,9 +1,9 @@
-import UploadResume from "./_components/UploadResume";
+import Hero from "./_components/Hero";
 
 export default function Landing() {
   return (
     <>
-      <UploadResume />
+      <Hero />
     </>
   );
 }
