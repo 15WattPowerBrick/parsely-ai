@@ -29,37 +29,38 @@ export async function POST(req: NextRequest) {
           mimeType: "application/pdf",
         },
       },
-      `Extract the following details from this resume and return a JSON format:
+      `For context, you are a resume parser for a recruitment company who is trying to sell this candidate to the client. Extract the following details from this resume and return a JSON format, In the ProfileSummary, you can put a detailed summary of the candidate, In the WorkExperience Summary, put the description from the resume:
       {
         "Name": "",
-        "Date of Birth": "",
+        "DateOfBirth": "",
         "Age": "",
         "Gender": "",
         "Race": "",
         "Nationality": "",
         "Residency": "",
-        "Notice Period": "",
+        "NoticePeriod": "",
         "Mobile": "",
         "Email": "",
+        "ProfileSummary": "",
         "Education": [
           {
             "School": "",
             "Qualification": "",
-            "Major / Department": "",
+            "Major": "",
             "From": "",
             "To": ""
           }
         ],
-        "Work Experience": [
+        "WorkExperience": [
           {
             "Company": "",
-            "Job Title": "",
+            "JobTitle": "",
             "Summary": [
               {
                 "Description": ""
               }
             ],
-            "Reason for Leaving": "",
+            "LeavingReason": "",
             "From": "",
             "To": ""
           }
@@ -68,7 +69,19 @@ export async function POST(req: NextRequest) {
     ]);
 
     const jsonResponse = result.response.text();
-    return NextResponse.json({ data: jsonResponse });
+    const cleanJson = jsonResponse.replace(/```json\n?|\n?```/g, "").trim();
+
+    try {
+      const parsedData = JSON.parse(cleanJson);
+      // Just send the parsed data directly
+      return NextResponse.json(parsedData);
+    } catch (jsonError) {
+      console.error("JSON parsing error:", jsonError);
+      return NextResponse.json(
+        { error: "Invalid JSON response" },
+        { status: 500 }
+      );
+    }
   } catch (error) {
     console.error("Error parsing resume:", error);
     return NextResponse.json(

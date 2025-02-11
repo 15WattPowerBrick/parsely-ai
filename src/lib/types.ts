@@ -1,33 +1,27 @@
-// src/lib/types.ts
-
-export type Education = {
-  School: string;
-  Qualification: string;
-  MajorDepartment: string;
-  From: string;
-  To: string;
-};
-
-export type WorkExperience = {
-  Company: string;
-  JobTitle: string;
-  Summary: { Description: string }[];
-  ReasonForLeaving: string;
-  From: string;
-  To: string;
-};
-
-export type ParsedResume = {
-  Name: string;
-  DateOfBirth: string;
-  Age: string;
-  Gender: string;
-  Race: string;
-  Nationality: string;
-  Residency: string;
-  NoticePeriod: string;
-  Mobile: string;
-  Email: string;
-  Education: Education[];
-  WorkExperience: WorkExperience[];
-};
+export interface ResumeData {
+  Name?: string;
+  DateOfBirth?: string | null;
+  Age?: number | null;
+  Gender?: string | null;
+  Nationality?: string | null;
+  Residency?: string | null;
+  NoticePeriod?: string | null;
+  Mobile?: string;
+  Email?: string;
+  ProfileSummary?: string;
+  Education?: {
+    School: string;
+    Qualification: string;
+    Major?: string | null;
+    From: string;
+    To: string;
+  }[];
+  WorkExperience?: {
+    Company: string;
+    JobTitle: string;
+    Summary?: { Description: string }[];
+    LeavingReason: string;
+    From: string;
+    To?: string | null;
+  }[];
+}
