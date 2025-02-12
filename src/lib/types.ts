@@ -9,6 +9,8 @@ export interface ResumeData {
   Mobile?: string;
   Email?: string;
   ProfileSummary?: string;
+  Language?: string;
+  Skills?: string;
   Education?: {
     School: string;
     Qualification: string;

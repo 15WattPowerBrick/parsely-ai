@@ -128,6 +128,14 @@ export default function ParselyLandingPage() {
                       <TableCell>{parsedResume.NoticePeriod}</TableCell>
                     </TableRow>
                     <TableRow>
+                      <TableCell className="font-medium">Languages</TableCell>
+                      <TableCell>{parsedResume.Language}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium">Skills</TableCell>
+                      <TableCell>{parsedResume.Skills}</TableCell>
+                    </TableRow>
+                    <TableRow>
                       <TableCell className="font-medium">AI Summary</TableCell>
                       <TableCell>{parsedResume.ProfileSummary}</TableCell>
                     </TableRow>
